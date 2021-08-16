@@ -73,8 +73,8 @@ jobs:
           working_directory: /
           command: |
             sudo apt-get -y -qq update
+            sudo apt-get install -y awscli
             sudo apt-get install -y python-pip python-dev build-essential
-            sudo pip install awscli
       - run:
           name: Build Project
           command: |
@@ -89,7 +89,7 @@ jobs:
             aws configure set preview.cloudfront
             if [ "${CURRENT_BRANCH}" == "master" ]
             then
-              aws cloudfront create-invalidation --distribution-id ${PRODUCTOIN_DISTRIBUTION_ID} --paths /\*
+              aws cloudfront create-invalidation --distribution-id ${PRODUCTION_DISTRIBUTION_ID} --paths /\*
             elif [ "${CURRENT_BRANCH}" == "staging"]
             then
               aws cloudfront create-invalidation --distribution-id ${STAGING_DISTRIBUTION_ID} --paths /\*
